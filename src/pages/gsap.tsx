@@ -1,9 +1,9 @@
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Box1 from "../components/box1";
 import Box2 from "../components/box2";
-import { ScrollTrigger, Draggable, Flip } from "gsap/all";  
+import { ScrollTrigger, Draggable, Flip } from "gsap/all";
 
 export default function Gsap() {
   useGSAP(() => {
@@ -104,20 +104,56 @@ export default function Gsap() {
 
   gsap.registerPlugin(Draggable, ScrollTrigger, Flip);
   const drag = useRef<HTMLDivElement>(null);
-  useGSAP(()=>{
-    if(drag.current){
+  useGSAP(() => {
+    if (drag.current) {
       Draggable.create(drag.current, {
-        type: "x,y",
-        bounds: {
-          minX: 0,
-          minY: 0,
-          maxX: 300,
-          maxY: 300
-        }
-      })
+        // type: "x,y",
+        type: "rotation",
+        //可拖拉的範圍
+        // bounds: {
+        //   minX: 0,
+        //   minY: 0,
+        //   maxX: 300,
+        //   maxY: 300
+        // }
+      });
     }
-  })
+  });
 
+  // const flip1 = useRef<HTMLDivElement>(null);
+  // const flip2 = useRef<HTMLDivElement>(null);
+  // const handleFlip = () => {
+  //   const state = Flip.getState([flip1.current, flip2.current]);
+
+  //   if (flip1.current && flip2.current) {
+  //     // 交换方块的位置
+  //     [flip1.current.style.transform, flip2.current.style.transform] =
+  //       [flip2.current.style.transform, flip1.current.style.transform];
+
+  //     // 动画效果
+  //     Flip.from(state, {
+  //       duration: 1,
+  //       ease: "power1.inOut",
+  //     });
+  //   }
+  // };
+
+  const scroll = useRef<HTMLDivElement>(null);
+  useGSAP(() => {
+    const boxes = gsap.utils.toArray(".box-scroll") as HTMLElement[]
+    boxes.forEach((box) => {
+      gsap.to(box, {
+        x: 150,
+        scrollTrigger: {
+          trigger: box,
+          start: 'bottom bottom',
+          end: 'top 20%',
+          scrub: true,
+          // markers: true,
+        },
+      });
+    })
+  }, {scope: scroll});
   return (
     <>
       <h5>Tweening</h5>
@@ -206,9 +242,33 @@ export default function Gsap() {
       >
         <div>Box8</div>
       </div>
-      <h5>Plugin</h5>
-      <div ref = {drag} className="w-24 h-24 flex justify-center items-center bg-[#afe8f3] rounded-lg box-draggable">
+      <h5>Plugin - Draggable</h5>
+      <div
+        ref={drag}
+        className="w-24 h-24 flex justify-center items-center bg-[#afe8f3] rounded-lg box-draggable"
+      >
         <div>Draggable</div>
+      </div>
+      {/* <h5>Plugin - Flip</h5>
+      <div className="w-full flex justify-between">
+        <div ref={flip1} className="w-24 h-24 flex justify-center items-center bg-[#afe8f3] rounded-lg" onClick={handleFlip}>
+          <div>Flip1</div>
+        </div>
+        <div ref={flip2} className="w-24 h-24 flex justify-center items-center bg-[#c2aff3] rounded-lg" onClick={handleFlip}>
+          <div>Flip2</div>
+        </div>
+      </div> */}
+      <h5>Plugin - ScrollTrigger</h5>
+      <div ref={scroll} className="w-full h-screen flex flex-col justify-center items-center">
+        <div className="m-2 w-24 h-24 flex justify-center items-center bg-[#f3afcf] rounded-lg box-scroll">
+          <div>Box9</div>
+        </div>
+        <div className="m-2 w-24 h-24 flex justify-center items-center bg-[#f3afcf] rounded-lg box-scroll">
+          <div>Box10</div>
+        </div>
+        <div className="m-2 w-24 h-24 flex justify-center items-center bg-[#f3afcf] rounded-lg box-scroll">
+          <div>Box11</div>
+        </div>
       </div>
     </>
   );
