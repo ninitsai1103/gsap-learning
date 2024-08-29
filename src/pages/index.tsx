@@ -9,6 +9,9 @@ export default function Index() {
                 <div className="text-3xl">Let's get started</div>
                 <Link className="my-2 p-2 rounded-lg bg-[#ecf3af]" type="button" to={"/gsap"}>GSAP Learning</Link>
                 <Link className=" my-2 p-2 rounded-lg bg-[#ecf3af]" type="button" to={"/3js"}>Three Js Learning</Link>
+                <Link className=" my-2 p-2 rounded-lg bg-[#ecf3af]" type="button" to={"/combine"}>Combine</Link>
+                <Link className=" my-2 p-2 rounded-lg bg-[#ecf3af]" type="button" to={"/combine2"}>Combine2</Link>
+                <Link className=" my-2 p-2 rounded-lg bg-[#ecf3af]" type="button" to={"/combine3"}>Combine3</Link>
             </div>
         </div>
     </>
