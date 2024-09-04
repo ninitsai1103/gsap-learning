@@ -5,6 +5,7 @@ import ThreeJs from "./pages/three-js";
 import Combine from "./pages/combine";
 import Combine2 from "./pages/combine2";
 import Combine3 from "./pages/combine3";
+import Horizontal from "./pages/horizontal";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 export default function AppRouter() {
@@ -17,6 +18,7 @@ export default function AppRouter() {
         <Route path="/combine" element={<Combine />}/>
         <Route path="/combine2" element={<Combine2 />}/>
         <Route path="/combine3" element={<Combine3 />}/>
+        <Route path="/horizontal" element={<Horizontal />}/>
       </Routes>
     </Router>
   );

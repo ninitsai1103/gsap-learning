@@ -12,6 +12,7 @@ export default function Index() {
                 <Link className=" my-2 p-2 rounded-lg bg-[#ecf3af]" type="button" to={"/combine"}>Combine</Link>
                 <Link className=" my-2 p-2 rounded-lg bg-[#ecf3af]" type="button" to={"/combine2"}>Combine2</Link>
                 <Link className=" my-2 p-2 rounded-lg bg-[#ecf3af]" type="button" to={"/combine3"}>Combine3</Link>
+                <Link className=" my-2 p-2 rounded-lg bg-[#ecf3af]" type="button" to={"/horizontal"}>Horizontal</Link>
             </div>
         </div>
     </>
