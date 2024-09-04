@@ -8,9 +8,11 @@ export default function Horizontal(): JSX.Element {
   const horizontalRef = useRef<HTMLDivElement>(null);
   useGSAP(() => {
     const sections = gsap.utils.toArray('section');
-    if (horizontalRef.current) {
+    const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+
+    if (horizontalRef.current && isDesktop) {
       gsap.to(sections, {
-        xPercent: -100 * (sections.length - 1), 
+        xPercent: -100 * (sections.length - 1),
         ease: 'none',
         scrollTrigger: {
           trigger: horizontalRef.current,
@@ -19,12 +21,15 @@ export default function Horizontal(): JSX.Element {
           markers: true,
         },
       });
+    } else {
+      // 如果螢幕寬度小於 768px，不進行動畫
+      gsap.set(sections, { clearProps: 'all' }); // 清除動畫屬性，確保不受影響
     }
   } , {scope: horizontalRef});
   return (
     <>
       <div className="p-12 min-h-4 flex flex-col justify-center items-center bg-black text-white">
-        <div className="max-w-[500px] min-w-10 ">
+        <div className="max-w-[500px]">
           <div className="text-3xl">Title</div>
           <div className="">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat eos
@@ -37,7 +42,7 @@ export default function Horizontal(): JSX.Element {
           </div>
         </div>
       </div>
-      <div ref={horizontalRef} className="w-[300dvw] h-[100dvh] flex no-wrap">
+      <div ref={horizontalRef} className="md:w-[300dvw] w-[100dvw] h-[100dvh] md:flex no-wrap">
         <section className="w-[100dvw] h-[100dvh] bg-blue-300 flex flex-col justify-center items-center">
           <div className="">1</div>
           <div className="">
